@@ -28,7 +28,7 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
+        format.html { redirect_to @admin, notice: 'Your post was successfully created.' }
         format.json { render :show, status: :created, location: @admin }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
+        format.html { redirect_to @admin, notice: 'Your post was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class AdminsController < ApplicationController
   def destroy
     @admin.destroy
     respond_to do |format|
-      format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
+      format.html { redirect_to admins_url, notice: 'Your post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class AdminsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_params
-      params.require(:admin).permit(:title, :author, :date, :tag, :content, :attachment)
+      params.require(:admin).permit(:Author, :Title, :date, :tag, :Content, :file)
     end
 end

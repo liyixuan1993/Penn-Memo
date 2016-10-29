@@ -17,7 +17,7 @@ class AdminsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create admin" do
     assert_difference('Admin.count') do
-      post admins_url, params: { admin: { attachment: @admin.attachment, author: @admin.author, content: @admin.content, date: @admin.date, tag: @admin.tag, title: @admin.title } }
+      post admins_url, params: { admin: { Author: @admin.Author, Content: @admin.Content, Title: @admin.Title, date: @admin.date, file: @admin.file, tag: @admin.tag } }
     end
 
     assert_redirected_to admin_url(Admin.last)
@@ -34,7 +34,7 @@ class AdminsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update admin" do
-    patch admin_url(@admin), params: { admin: { attachment: @admin.attachment, author: @admin.author, content: @admin.content, date: @admin.date, tag: @admin.tag, title: @admin.title } }
+    patch admin_url(@admin), params: { admin: { Author: @admin.Author, Content: @admin.Content, Title: @admin.Title, date: @admin.date, file: @admin.file, tag: @admin.tag } }
     assert_redirected_to admin_url(@admin)
   end
 

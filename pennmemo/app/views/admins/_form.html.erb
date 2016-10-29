@@ -11,41 +11,37 @@
     </div>
   <% end %>
 
-<form class="form-horizontal" >
-
-  <div class="row" align="center">
-      <%= f.label :title %>
-      <%=f.text_field :title %>
+  <div class="field">
+    <%= f.label :Author %>
+    <%= f.text_field :Author %>
   </div>
 
-<div class="form-group" align="center">
-  <label for="author"><%= f.label :author %></label>
-  <div><%=f.text_field :author %></div>
-</div>
-
-<div class="form-group" align="center">
-  <label for="date"><%= f.label :date %></label>
-  <div><%= f.date_select :date %></div>
-</div>
-
-<div class="form-group" align="center">
-  <label for="tag"><%= f.label :tag %></label>
-  <div><%= f.text_field :tag %></div>
-</div>
-
-  <div class="form-group" align="center">
-    <label for="tag"><%= f.label :content %></label>
-    <div><%= f.text_area :content %></div>
+  <div class="field">
+    <%= f.label :Title %>
+    <%= f.text_field :Title %>
   </div>
 
-  <div class="form-group" align="center">
-    <label for="tag"><%= f.label :attachment %></label>
-    <div margin= "0 auto"><%= f.text_field :attachment %></div>
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :date %>
   </div>
 
-  <div  align="center">
+  <div class="field">
+    <%= f.label :tag %>
+    <%= f.text_field :tag %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Content %>
+    <%= f.text_field :Content %>
+  </div>
+
+  <div class="field">
+    <%= f.label :file %>
+    <%= f.text_field :file %>
+  </div>
+
+  <div class="actions">
     <%= f.submit %>
   </div>
-
-</form>
 <% end %>

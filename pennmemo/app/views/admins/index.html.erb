@@ -1,18 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<div id="Admin-title" class="container-fluid">
-<h1>Admins</h1>
-</div>
+<h1>Penn Memo</h1>
 
-<table class="table table-striped">
+<table>
   <thead>
     <tr>
-      <th>Title</th>
       <th>Author</th>
+      <th>Title</th>
       <th>Date</th>
       <th>Tag</th>
       <th>Content</th>
-      <th>Attachment</th>
+      <th>File</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,12 +18,12 @@
   <tbody>
     <% @admins.each do |admin| %>
       <tr>
-        <td><%= admin.title %></td>
-        <td><%= admin.author %></td>
+        <td><%= admin.Author %></td>
+        <td><%= admin.Title %></td>
         <td><%= admin.date %></td>
         <td><%= admin.tag %></td>
-        <td><%= admin.content %></td>
-        <td><%= admin.attachment %></td>
+        <td><%= admin.Content %></td>
+        <td><%= admin.file %></td>
         <td><%= link_to 'Show', admin %></td>
         <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
         <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -36,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Admin', new_admin_path, class: 'btn btn-default'%>
+<%= link_to 'New Admin', new_admin_path %>
