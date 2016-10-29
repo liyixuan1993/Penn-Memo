@@ -23,3 +23,8 @@ Feature: New Post page
 		Given I'm on the add New Post page
 	 	When I add a new post without content
 	  	Then I can't create a new post without content
+
+	Scenario: Add a new post with content smaller than 10 charaters
+		Given I'm on the add New Post page
+		When I add a new post with content smaller than 10 characters
+		Then I can't create a new post

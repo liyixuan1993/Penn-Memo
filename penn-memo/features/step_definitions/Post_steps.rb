@@ -56,4 +56,16 @@ Then (/^I can't create a new post without content$/) do
 	assert page.has_content?("Content can't be blank")
 end
 
+When (/^I add a new post with content smaller than 10 characters$/) do
+	fill_in 'Author', :with => "Yimeng"
+	fill_in 'Title', :with => "Go to van pelt lib today"
+	fill_in 'Tag', :with => "Dinner"
+	fill_in 'Content', :with => "Hi"
+	click_button "Create Admin"
+end
+
+Then (/^I can't create a new post$/) do 
+	assert page.has_content?("minimum is 10 characters")
+end
+
 
