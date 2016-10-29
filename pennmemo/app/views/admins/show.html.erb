@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @admin.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @admin.author %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @admin.date %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @admin.tag %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @admin.content %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @admin.attachment %>
+</p>
+
+<%= link_to 'Edit', edit_admin_path(@admin) %> |
+<%= link_to 'Back', admins_path %>
