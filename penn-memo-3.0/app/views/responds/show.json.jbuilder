@@ -1,0 +1,1 @@
+json.partial! "responds/respond", respond: @respond

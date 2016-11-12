@@ -1,36 +1,115 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Penn Memo</h1>
+<div class="container">
+   <div class="row">
+     <div class="col-xs-2">
+     
+     <h1>
+     Tag area
+     </h1>
+    
+     </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+     <div class="col-xs-10">
 
-  <tbody>
-    <% @memos.each do |memo| %>
-      <tr>
-        <td><%= memo.title %></td>
-        <td><%= memo.author %></td>
-        <td><%= memo.date %></td>
-        <td><%= memo.category_name %></td>
-        <td><%= memo.content %></td>
-        <td><%= memo.priority %></td>
-        <td><%= link_to 'Show', memo %></td>
-        <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
-        <td><%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+     <div class="container">
+     <h1>Priority
+     </h1>
+     <% if Memo.where("priority != '' ").count > 0 %> 
+     <h2> you have <%= Memo.where("priority != '' ").count %> priority memos </h2>
+     <% end %>
 
-<br>
 
-<%= link_to 'New Memo', new_memo_path %>
+     <% @memos.each do |memo| %>
+       <% if memo.priority != ""  %>
+
+     <table class="table table-hover">
+        <thead>
+          <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Content</th>
+          <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          
+          <tr>
+          <td><%= memo.title %></td>
+          <td><%= memo.date %></td>
+          <td><%= memo.category_name %></td>
+          <td><%= memo.content %></td>
+          <td><%= link_to 'Show', memo %></td>
+          <% if current_user.admin %>
+          <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
+          <td><%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+         </tr>
+          <% end %>
+      <% end %>
+
+         </tbody>
+      </table>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+
+
+
+
+
+
+
+     <div id="memolist" class="container">
+     <h1>Penn Memo</h1>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Content</th>
+          <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @memos.each do |memo| %>
+          <tr>
+          <td><%= memo.title %></td>
+          <td><%= memo.date %></td>
+          <td><%= memo.category_name %></td>
+          <td><%= memo.content %></td>
+          <td><%= link_to 'Show', memo %></td>
+          <% if current_user.admin %>
+          <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
+          <td><%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+         </tr>
+          <% end %>
+         </tbody>
+      </table>
+
+      <br>
+      <% if current_user.admin %>
+      <%= link_to 'New Memo', new_memo_path, class: "btn btn-default"%> 
+      <% end %>
+      </div> 
+
+     </div>
+   </div>
+</div>
+
+
+
+
+
