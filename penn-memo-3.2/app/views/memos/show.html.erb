@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<div id="header">
+  <h1>Memo Info</h1>
+</div>
+
+<div id="left">
+</div>
+
+
+<div id="middle">
+<p>
+  <strong>Title:</strong>
+  <%= @memo.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @memo.author %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @memo.date %>
+</p>
+
+<p>Category: </p>
+
+
+<p>
+  <strong>Content:</strong>
+  <%= @memo.content %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @memo.priority %>
+</p>
+
+<%= link_to 'Edit', edit_memo_path(@memo) %> |
+<%= link_to 'Back', memos_path %>
+
+
+</div>
+
+<div id="right">
+</div>
+
+<style>
+
+
+#header {
+    background-color:white;
+    color:black;
+    text-align:center;
+    padding:5px;
+}
+
+#left {
+    line-height:30px;
+    background-color:white;
+    height:300px;
+    width:25%;
+    float:left;
+    padding:5px;
+}
+#right {
+    line-height:30px;
+    background-color:white;
+    height:300px;
+    width:25%;
+    float:right;
+    padding:5px;
+}
+#middle {
+    width:50%;
+    float:left;
+    padding:10px;
+}
+
+</style>
+
+
+
+
