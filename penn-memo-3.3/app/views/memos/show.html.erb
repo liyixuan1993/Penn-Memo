@@ -74,4 +74,8 @@
 
 
 <%= link_to 'Edit', edit_memo_path(@memo) %> |
+<% if @memo.priority == true %>
+<%= link_to 'Back', priority_page_index_path %>
+<% else  %>
 <%= link_to 'Back', memos_path %>
+<% end %>
