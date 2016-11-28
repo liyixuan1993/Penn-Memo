@@ -20,6 +20,10 @@
   <%= @memo.content %>
 </p>
 
+
+
+
+
 <p>
   <strong>Priority:</strong>
   <%= @memo.priority %>
@@ -28,6 +32,11 @@
 <p>
   <strong>Tag:</strong>
   <%= @memo.tag.name %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+ <%= link_to image_tag(@memo.image.url, class: 'media-object'), @memo.image.url, target: '_blank' %>
 </p>
 
 <p>

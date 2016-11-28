@@ -53,6 +53,7 @@
             <tr>
               <th >Title</th>
               <th >Date</th>
+              <th >Tag</th>
               <th >Content</th>
               <th colspan="3"></th>
             </tr>
@@ -64,6 +65,7 @@
               <tr>
                 <td><%= memo.title %></td>
                 <td><%= memo.date %></td>
+                <td><%= memo.tag.name %></td>
                 <td><%= memo.content %></td>
                 <td><%= link_to 'Show', memo %></td>
                  <% if current_user.admin %>

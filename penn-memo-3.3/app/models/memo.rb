@@ -17,4 +17,7 @@ class Memo < ApplicationRecord
   belongs_to :tag
   has_many :responses
   has_many :memos, through: :responses
+  has_attached_file :image
+  validates_attachment :image, content_type: { content_type: ["application/pdf", "image/jpeg", "image/gif", "image/png"] }
+              
 end
