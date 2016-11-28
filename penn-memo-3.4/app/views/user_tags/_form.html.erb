@@ -1,0 +1,26 @@
+<%= form_for(user_tag) do |f| %>
+  <% if user_tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_tag.errors.count, "error") %> prohibited this user_tag from being saved:</h2>
+
+      <ul>
+      <% user_tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => current_user.id  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tag_id %>
+    <%= collection_select :user_tag, :tag_id, Tag.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
