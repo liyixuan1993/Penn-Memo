@@ -1,0 +1,55 @@
+<%= form_for(memo) do |f| %>
+  <% if memo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(memo.errors.count, "error") %> prohibited this memo from being saved:</h2>
+
+      <ul>
+      <% memo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field">
+    <%= f.label :tag_id %>
+    <%= collection_select :memo, :tag_id, Tag.all, :id, :name %>
+    <%= link_to "Add Tag", new_tag_path %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :author %>
+    <%= f.text_field :author %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :attachment %>
+    <%= f.file_field :image%>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :priority %>
+    <%= f.label :priority %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit%>
+  </div>
+<% end %>
