@@ -4,6 +4,11 @@
     <!--Tag list area-->
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
       <div class="container" >
+  		<br>
+  		<%= form_tag(memos_path, :method => "get", id: "search-form") do %>
+  		<%= text_field_tag :search, params[:search], placeholder: "Search Memos" %>
+  		<%= submit_tag "Search" %>
+  		<% end %>
         <br>
         <%= link_to "Add Tag", new_user_tag_path, class:"btn btn-success btn-xs" %> <%= link_to "Delete Tag", user_tags_path, class:"btn btn-danger btn-xs" %>
         <br>

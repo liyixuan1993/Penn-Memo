@@ -6,6 +6,11 @@ class MemosController < ApplicationController
   def index
     @memos = Memo.all
     @tags = Tag.all
+    if params[:search]
+      @memos = Memo.search(params[:search]).order("created_at DESC")
+    else
+      @memos = Memo.all
+    end
   end
 
   # GET /memos/1
