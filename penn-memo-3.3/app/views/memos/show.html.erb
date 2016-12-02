@@ -34,10 +34,17 @@
   <%= @memo.tag.name %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Attachment:</strong>
  <%= link_to image_tag(@memo.image.url, class: 'media-object'), @memo.image.url, target: '_blank' %>
-</p>
+</p> -->
+
+<% if @memo.image.file? %>
+  <!-- <strong>Attachment:</strong> -->
+  <%= link_to image_tag(@memo.image.url, class: 'media-object'), @memo.image.url, target: '_blank' %>
+<% end %>
+
+
 
 <p>
   <strong>Response:</strong>
