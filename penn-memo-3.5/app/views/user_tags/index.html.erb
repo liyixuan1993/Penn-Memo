@@ -1,3 +1,4 @@
+<div class="container" style="width:60%">
 <p id="notice"><%= notice %></p>
 
 <h1>User Tags</h1>
@@ -16,7 +17,7 @@
     <% if user_tag.tag != nil %>
       <tr>
         <td><%= user_tag.tag.name %></td>
-        <td><%= link_to 'Destroy', user_tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', user_tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <% end %>
@@ -25,4 +26,6 @@
 
 <br>
 
-<%= link_to 'Back', memos_path %>
+<%= link_to 'Back', memos_path, class:"btn btn-default" %>
+
+</div>

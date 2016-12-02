@@ -1,90 +1,83 @@
+<div class="container" >
 <p id="notice"><%= notice %></p>
+<div class="container" style="width:60%">
 
-<p>
-  <strong>Title:</strong>
-  <%= @memo.title %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @memo.author %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @memo.date %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @memo.content %>
-</p>
+    <div class="row " style="height:30px">
+      <div class="col-xs-6">
+        <strong><%= @memo.author%></strong>
+      </div>
+      <div class="col-xs-6" style="text-align:right">
+        <% if @memo.priority %>
+        <strong>Priority</strong>
+        <% end %>
+      </div>
+    </div>
 
 
+     <div style="height:150px">
+       <strong><%= @memo.title %></strong>
+       <div><%= @memo.content %></div>
+     </div>
 
 
+  <div class="row" style="height:20px">
+    <div class="col-xs-6">
+    <strong>#<%= @memo.tag.name %></strong>
+    </div>
+    <div class="col-xs-6" style="text-align:right">
+    <strong><%= @memo.date %></strong>
+    </div>
+  </div>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @memo.priority %>
-</p>
 
-<p>
-  <strong>Tag:</strong>
-  <%= @memo.tag.name %>
-</p>
+  <div>
+    <strong>Attachment:</strong>
+    <%= link_to image_tag(@memo.image.url, class: 'media-object'), @memo.image.url, target: '_blank' %>
+  </div>
 
-<p>
-  <strong>Attachment:</strong>
- <%= link_to image_tag(@memo.image.url, class: 'media-object'), @memo.image.url, target: '_blank' %>
-</p>
+<br>
+<br>
 
-<p>
-  <strong>Response:</strong>
-  <% @memo.responses.each do |r| %>
-  <br>
-  User<%= r.user.id %> : <%= r.content %>
+  <div >
+    <strong>Response:</strong>
+    <div style="height:120px; overflow-y:scroll">
+    <% @memo.responses.each do |r| %>
+    User<%= r.user.id %> : <%= r.content %>
+    <br>
+    <% end %>
+    </div>
+  </div>
+
+
+  <div>
+    <%= form_for @response do |f| %>
+    <div class="form-group">
+      <strong> Your Response </strong><br>
+      <%= f.text_area :content, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+       <%= f.hidden_field :user_id, :value => current_user.id %>
+    </div>
+    <div class="form-group">
+       <%= f.hidden_field :memo_id, :value => @memo.id %>
+    </div>
+
+    <div class="actions">
+       <%= f.submit class:"btn btn-default form-control"%>
+    </div>
+       <% end %>
+  </div>
+
+
+  <% if current_user.admin %>
+  <%= link_to 'Edit', edit_memo_path(@memo), class:"btn btn-default"%>
   <% end %>
-</p>
+  <% if @memo.priority %>
+  <%= link_to 'back', priority_page_index_path, class:"btn btn-default"%>
+  <% else %>
+  <%= link_to 'back', memos_path , class:"btn btn-default"%>
+  <% end %>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-<%= form_for @response do |f| %>
-
-<div class="field">
-  <strong> Your Response </strong><br>
-  <%= f.text_field :content %>
 </div>
-
-<div class="field">
-  <%= f.hidden_field :user_id, :value => current_user.id %>
 </div>
-
-<div class="field">
-  <%= f.hidden_field :memo_id, :value => @memo.id %>
-</div>
-
-<div class="actions">
-  <%= f.submit %>
-</div>
-<% end %>
-
-
-
-<br>
-<br>
-<br>
-<br>
-
-
-<%= link_to 'Edit', edit_memo_path(@memo) %> |
-<% if @memo.priority == true %>
-<%= link_to 'Back', priority_page_index_path %>
-<% else  %>
-<%= link_to 'Back', memos_path %>
-<% end %>

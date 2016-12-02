@@ -1,3 +1,4 @@
+<div style="width:100%">
 <%= form_for(memo) do |f| %>
   <% if memo.errors.any? %>
     <div id="error_explanation">
@@ -13,30 +14,29 @@
 
 
 
-  <div class="field">
-    <%= f.label :tag_id %>
-    <%= collection_select :memo, :tag_id, Tag.all, :id, :name %>
-    <%= link_to "Add Tag", new_tag_path %>
+  <div class="form-group">
+    <%= f.label :tag_id %> <strong>#</strong>
+    <%= collection_select :memo, :tag_id, Tag.all, :id, :name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Add Tag", new_tag_path, class:"btn btn-default btn-sm"%>
   </div>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.text_field :title,class:"form-control", placeholder:"Title" %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.text_field :author,class:"form-control", placeholder:"Author" %>
   </div>
 
-  <div class="field">
-    <%= f.label :author %>
-    <%= f.text_field :author %>
-  </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= f.label :date %>
-    <%= f.date_select :date %>
+    <br>
+    <%= f.date_select :date%>
   </div>
 
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  <div class="form-group">
+    <%= f.text_area :content, class:"form-control", style:"height:100px",placeholder:"Content" %>
   </div>
 
   <div class="form-group">
@@ -44,12 +44,15 @@
     <%= f.file_field :image%>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.check_box :priority %>
     <%= f.label :priority %>
   </div>
 
   <div class="actions">
-    <%= f.submit%>
+    <%= f.submit class:"btn btn-default form-control"%>
   </div>
 <% end %>
+
+</div>
+<br>

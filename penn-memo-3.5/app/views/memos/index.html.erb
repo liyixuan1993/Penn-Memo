@@ -1,21 +1,25 @@
 
 <p id="notice"><%= notice %></p>
-
-<div class="container">
-  <div class="row">
-
-    <div class="col-xs-2 col-md-2 col-lg-2 ">
-      <div class="container">
-        <br>
-        <br>
+  <div class="row" >
+    <!--Tag list area-->
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+      <div class="container" >
         <br>
         <%= link_to "Add Tag", new_user_tag_path, class:"btn btn-success btn-xs" %> <%= link_to "Delete Tag", user_tags_path, class:"btn btn-danger btn-xs" %>
         <br>
-        <h3>Tag list</h3>
         <br>
+        <h3>Selected Tags</h3>
+        <br>
+        <br>
+
+
         <% current_user.user_tags.each do |user_tag| %>
           <% if user_tag.tag != nil %>
-        <%= user_tag.tag.name %><br>
+          <div class="form-group" >
+            <button class="btn btn-info" >
+              #<%= user_tag.tag.name %>
+            </button>
+          </div>
           <% end %>
         <% end %>
 
@@ -25,75 +29,60 @@
 
       </div>
     </div>
+    <!--Priority memo area-->
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" >
+      <% if current_user.user_tags.count > 0 %>
 
-
-  <% if current_user.user_tags.count > 0 %>
-   <% if current_user.user_tags.map(&:tag_id) & Memo.all.map(&:tag_id) != [] %>
-
-      <div class="col-xs-10 col-md-10 col-lg-10 " >
-        <div class="container" >
+        <% if current_user.user_tags.map(&:tag_id) & Memo.all.map(&:tag_id) != [] %>
 
          <% if Memo.where(:priority => true).count > 0 %>
 
-         <div align="center">
+
+          <% if Memo.where(:priority => true, :tag_id =>  current_user.user_tags.map(&:tag_id)).count > 0%>
+         <div class="container">
           <%= link_to priority_page_index_path do %>
-         <button class="btn btn-default btn-lg" type="submit"> you have <%= Memo.where(:priority => true, :tag_id =>  current_user.user_tags.map(&:tag_id)).count %> priority memos
+         <button class="btn btn-default btn-lg" type="submit" style="width:98%"> you have <%= Memo.where(:priority => true, :tag_id =>  current_user.user_tags.map(&:tag_id)).count %> priority memos
           <br>
          </button>
           <% end %>
          </div>
+          <% end %>
+
+
          <% end %>
          <br>
+         <br>
+
+         <h1>Memos</h1>
+
+               <div class="container" style="height:400px; overflow-y:scroll">
+                 <div >
+              <% @memos.each do |memo| %>
+                <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
+                <%= link_to memo do %>
+                <button class="btn btn-default btn-lg " type="submit" style="width:100%">
+                     <p style="text-align:left"><%= memo.author %></p>
+                     <p style="text-align:left"><%= memo.content %></p>
+                     <p style="text-align:left"><%= memo.tag.name %></p>
+                     <p style="text-align:left"><%= memo.date %></p>
+               </button>
+                   <br>
+                   <% end %>
+              <br>
+                  <% end %>
+                  <% end %>
+                </div>
+              </div>
 
 
-
-<div class="row">
-  <div class="col-xs-10 col-md-10 col-lg-10 ">
-      <h1>Memos</h1>
-          <table class="table table-hover ">
-          <thead>
-            <tr>
-              <th >Title</th>
-              <th >Tag</th>
-              <th >Content</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-          <% @memos.each do |memo| %>
-             <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
-              <tr>
-                <td><%= memo.title %></td>
-                <td><%= memo.tag.name %></td>
-                <td><%= memo.content %></td>
-                <td><%= link_to 'Show', memo %></td>
-                 <% if current_user.admin %>
-                <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
-                <td><%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                 <% end %>
-              </tr>
-             <% end %>
           <% end %>
-          </tbody>
+      <% end %>
 
-        </table>
-      </div>
-
-      <div class="col-xs-2 col-md-2 col-lg-2 ">
-      </div>
-
-    </div>
-       <% end %>
-   <% end %>
-
-    </div>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+    <span></span>
+  </div>
+</div>
 
 
-
-
-    </div>
-
-
-    </div>
-    </div>
+<!-- end of Memos -->

@@ -66,6 +66,8 @@
 #
 
 Rails.application.routes.draw do
+  get 'memolist/index'
+
   get 'priority_page/index'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -79,5 +81,7 @@ Rails.application.routes.draw do
   match 'memos/:id' => 'memos#show', via: [:get, :post]
 
   resources :tags
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

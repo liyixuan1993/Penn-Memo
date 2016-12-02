@@ -1,3 +1,11 @@
+
+<div class="container" style="width:200px">
+
+<h1>Add Tag</h1>
+
+<br>
+
+
 <%= form_for(user_tag) do |f| %>
   <% if user_tag.errors.any? %>
     <div id="error_explanation">
@@ -11,16 +19,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.hidden_field :user_id, :value => current_user.id  %>
+  <div class="form-group">
+    <%= f.hidden_field :user_id, :value => current_user.id, class:"form-control"  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :tag_id %>
-    <%= collection_select :user_tag, :tag_id, Tag.all, :id, :name %>
+    <%= collection_select :user_tag, :tag_id, Tag.all, :id, :name ,class:"form-control"%>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add", class:"btn btn-default ", style:"width:138px"%>
   </div>
+
+    <%= link_to 'Cancel', memos_path, class:"btn btn-default", style:"width:138px"%>
+
+
 <% end %>
+
+
+
+</div>

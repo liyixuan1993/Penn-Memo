@@ -28,7 +28,7 @@ class UserTagsController < ApplicationController
 
     respond_to do |format|
       if @user_tag.save
-        format.html { redirect_to @user_tag, notice: 'User tag was successfully created.' }
+        format.html { redirect_to memos_path, notice: 'User tag was successfully created.' }
         format.json { render :show, status: :created, location: @user_tag }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class UserTagsController < ApplicationController
   def destroy
     @user_tag.destroy
     respond_to do |format|
-      format.html { redirect_to user_tags_url, notice: 'User tag was successfully destroyed.' }
+      format.html { redirect_to memos_path, notice: 'User tag was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

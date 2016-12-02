@@ -5,6 +5,7 @@ class MemosController < ApplicationController
   # GET /memos.json
   def index
     @memos = Memo.all
+    @tags = Tag.all
   end
 
   # GET /memos/1
@@ -17,6 +18,10 @@ class MemosController < ApplicationController
   # GET /memos/new
   def new
     @memo = Memo.new
+  end
+
+  def memolist
+    @memos = Memo.all
   end
 
   # GET /memos/1/edit
@@ -58,10 +63,16 @@ class MemosController < ApplicationController
   def destroy
     @memo.destroy
     respond_to do |format|
-      format.html { redirect_to memos_url, notice: 'Memo was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Memo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
+
+
+
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,4 +84,5 @@ class MemosController < ApplicationController
     def memo_params
       params.require(:memo).permit(:title, :author, :date, :content, :image, :priority, :tag_id)
     end
+
 end
