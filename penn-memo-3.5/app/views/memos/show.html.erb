@@ -4,7 +4,7 @@
 
     <div class="row " style="height:30px">
       <div class="col-xs-6">
-        <strong><%= @memo.author%></strong>
+        <strong>From:</strong>&nbsp;<%= @memo.author%>
       </div>
       <div class="col-xs-6" style="text-align:right">
         <% if @memo.priority %>
@@ -15,7 +15,8 @@
 
 
      <div style="height:150px">
-       <strong><%= @memo.title %></strong>
+       <div><%= @memo.title %></div>
+       <br>
        <div><%= @memo.content %></div>
      </div>
 
@@ -41,36 +42,52 @@
 <br>
 <br>
 
-  <div >
-    <strong>Response:</strong>
-    <div style="height:120px; overflow-y:scroll">
-    <% @memo.responses.each do |r| %>
-    User<%= r.user.id %> : <%= r.content %>
-    <br>
-    <% end %>
-    </div>
-  </div>
+ <div class="form-group" >
+   <button type="button" class="btn btn-default form-control" data-toggle="collapse" data-target="#rsp-area">
+     Comments
+   </button>
 
+   <br>
 
-  <div>
-    <%= form_for @response do |f| %>
-    <div class="form-group">
-      <strong> Your Response </strong><br>
-      <%= f.text_area :content, class:"form-control" %>
-    </div>
+   <div id="rsp-area" class="collapse">
 
-    <div class="form-group">
-       <%= f.hidden_field :user_id, :value => current_user.id %>
-    </div>
-    <div class="form-group">
-       <%= f.hidden_field :memo_id, :value => @memo.id %>
-    </div>
-
-    <div class="actions">
-       <%= f.submit class:"btn btn-default form-control"%>
-    </div>
+     <div >
+       <strong>Response:</strong>
+       <div style="height:120px; overflow-y:scroll">
+       <% @memo.responses.each do |r| %>
+       User<%= r.user.id %> : <%= r.content %>
+       <br>
        <% end %>
+       </div>
+     </div>
+
+
+      <div>
+         <%= form_for @response do |f| %>
+        <div class="form-group">
+          <strong> Your Response </strong><br>
+         <%= f.text_area :content, class:"form-control" %>
+       </div>
+
+       <div class="form-group">
+         <%= f.hidden_field :user_id, :value => current_user.id %>
+       </div>
+
+       <div class="form-group">
+         <%= f.hidden_field :memo_id, :value => @memo.id %>
+       </div>
+
+       <div class="actions">
+         <%= f.submit class:"btn btn-default form-control"%>
+       </div>
+        <% end %>
+      </div>
+    </div>
   </div>
+
+
+<br>
+<br>
 
 
   <% if current_user.admin %>

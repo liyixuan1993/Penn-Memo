@@ -56,20 +56,27 @@
          <h1>Memos</h1>
 
                <div class="container" style="height:400px; overflow-y:scroll">
-                 <div >
+
               <% @memos.each do |memo| %>
                 <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
+                <div >
                 <%= link_to memo do %>
-                <button class="btn btn-default btn-lg " type="submit" style="width:100%">
-                     <p style="text-align:left"><%= memo.author %></p>
-                     <p style="text-align:left"><%= memo.content %></p>
-                     <p style="text-align:left"><%= memo.tag.name %></p>
-                     <p style="text-align:left"><%= memo.date %></p>
+                <button class="btn btn-default btn-lg " type="submit" style="width:100%; overflow-x:hidden">
+                     <p style="text-align:left">From:&nbsp;<%= memo.author %></p>
+                     <p style="text-align:left"><%= memo.content%></p>
+                     <div class="row">
+                       <div class="col-xs-6">
+                         <p style="text-align:left">#<%= memo.tag.name %></p>
+                       </div>
+                       <div class="col-xs-6">
+                         <p style="text-align:right"><%= memo.date %></p>
+                       </div>
+                     </div>
                </button>
-                   <br>
-                   <% end %>
-              <br>
+               <% end %>
+             </div>
                   <% end %>
+                  <br>
                   <% end %>
                 </div>
               </div>
@@ -82,7 +89,7 @@
   <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
     <span></span>
   </div>
-</div>
+
 
 
 <!-- end of Memos -->

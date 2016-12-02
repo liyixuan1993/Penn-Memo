@@ -1,38 +1,38 @@
 
-<div class="container">
+<div class="container" >
+<div  >
 <h1>Priority Memos</h1>
+</div>
 
 <% if current_user.user_tags.map(&:tag_id) & Memo.all.map(&:tag_id) != [] %>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th >Title</th>
-      <th >Date</th>
-      <th >Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @memos.each do |memo| %>
-    <% if memo.priority == true%>
-    <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
-      <tr>
-        <td><%= memo.title %></td>
-        <td><%= memo.date %></td>
-        <td><%= memo.content %></td>
-        <td><%= link_to 'Show', memo %></td>
-        <% if current_user.admin %>
-        <td><%= link_to 'Edit', edit_memo_path(memo) %></td>
-        <td><%= link_to 'Destroy', memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+<div class="container" style="height:400px;overflow-y:scroll">
+  <div >
+<% @memos.each do |memo| %>
+ <% if memo.priority == true%>
+ <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
+ <%= link_to memo do %>
+ <button class="btn btn-default btn-lg " type="submit" style="width:100%">
+      <p style="text-align:left">From:&nbsp;<%= memo.author %></p>
+      <p style="text-align:left"><%= memo.content %></p>
+      <div class="row">
+        <div class="col-xs-6">
+          <p style="text-align:left">#<%= memo.tag.name %></p>
+        </div>
+        <div class="col-xs-6">
+          <p style="text-align:right"><%= memo.date %></p>
+        </div>
+      </div>
+</button>
+    <br>
     <% end %>
-    <% end %>
-    <% end %>
+<br>
+   <% end %>
+   <% end %>
+   <% end %>
+ </div>
+</div>
 
-  </tbody>
-</table>
 <% end %>
 
 <%= link_to 'Back to mainpage', memos_path, class:"btn btn-default" %>
