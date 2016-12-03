@@ -1,6 +1,6 @@
 
 <div class="container" >
-<div  >
+<div class="container" >
 <h1>Priority Memos</h1>
 </div>
 
@@ -13,11 +13,11 @@
  <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
  <%= link_to memo do %>
  <button class="btn btn-default btn-lg " type="submit" style="width:100%">
-      <p style="text-align:left">From:&nbsp;<%= memo.author %></p>
-      <p style="text-align:left"><%= memo.content %></p>
+      <p style="text-align:left; overflow-x:hidden;width:210px"><strong>From:&nbsp;</strong><%= memo.author %></p>
+      <p style="word-break:break-all; width:100%; overflow-x:hidden; height:20px; overflow-y:hidden"><%= memo.content %></p>
       <div class="row">
         <div class="col-xs-6">
-          <p style="text-align:left">#<%= memo.tag.name %></p>
+          <p style="text-align:left"><strong>#<%= memo.tag.name %></strong></p>
         </div>
         <div class="col-xs-6">
           <p style="text-align:right"><%= memo.date %></p>
@@ -31,9 +31,11 @@
    <% end %>
    <% end %>
  </div>
+
 </div>
 
 <% end %>
-
-<%= link_to 'Back to mainpage', memos_path, class:"btn btn-default" %>
+<div class="container">
+ <%= link_to 'Back to mainpage', memos_path, class:"btn btn-default" %>
+ </div>
 </div>
