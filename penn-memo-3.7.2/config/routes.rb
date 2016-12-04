@@ -79,6 +79,9 @@ Rails.application.routes.draw do
 
   resources :memos
   match 'memos/:id' => 'memos#show', via: [:get, :post]
+  
+
+
 
   resources :tags
 

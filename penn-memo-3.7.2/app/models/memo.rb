@@ -24,4 +24,6 @@ class Memo < ApplicationRecord
         where("tag_id LIKE ? OR content LIKE ? OR title LIKE ? OR author LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
+
+
 end

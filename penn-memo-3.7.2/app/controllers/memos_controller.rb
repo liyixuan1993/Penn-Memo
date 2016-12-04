@@ -11,6 +11,7 @@ class MemosController < ApplicationController
     else
       @memos = Memo.all
     end
+
   end
 
   # GET /memos/1
@@ -32,6 +33,8 @@ class MemosController < ApplicationController
   # GET /memos/1/edit
   def edit
   end
+
+
 
   # POST /memos
   # POST /memos.json

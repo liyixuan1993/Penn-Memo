@@ -2,8 +2,8 @@
 <p id="notice"><%= notice %></p>
   <div class="row" >
     <!--Tag list area-->
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
-      <div class="container" style="height:300px">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="width:150px ">
+      <div class="container" >
   		<br>
   		<%= form_tag(memos_path, :method => "get", id: "search-form") do %>
   		<%= text_field_tag :search, params[:search], placeholder: "Search", style:"width:80px" %>
@@ -21,9 +21,15 @@
 
         <% current_user.user_tags.each do |user_tag| %>
           <% if user_tag.tag != nil %>
-          <div class="form-group" >
-            <%= link_to "##{user_tag.tag.name}",memos_path(@memos, :search => user_tag.tag.name), class:"btn btn-info"%>
+          <div class="form-group" style="width:130px">
+            <%= link_to memos_path(@memos, :search => user_tag.tag.id) do%>
+            <button id="myBtn" class="btn btn-default form-control" >
+              <%= user_tag.tag.name %>
+            </button>
+              <% end %>
           </div>
+
+
           <% end %>
         <% end %>
 
@@ -37,9 +43,11 @@
     <!--Priority memo area-->
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" >
       <div  style="width:600px">
+
       <% if current_user.user_tags.count > 0 %>
 
         <% if current_user.user_tags.map(&:tag_id) & Memo.all.map(&:tag_id) != [] %>
+
 
          <% if Memo.where(:priority => true).count > 0 %>
 
