@@ -21,7 +21,7 @@ class Memo < ApplicationRecord
   validates_attachment :image, content_type: { content_type: ["application/pdf", "image/jpeg", "image/gif", "image/png"] }
   
   def self.search(search)
-    where("content LIKE ? OR title LIKE ? OR author LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+        where("tag_id LIKE ? OR content LIKE ? OR title LIKE ? OR author LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
   end
               
 end

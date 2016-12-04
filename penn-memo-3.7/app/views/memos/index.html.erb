@@ -22,9 +22,7 @@
         <% current_user.user_tags.each do |user_tag| %>
           <% if user_tag.tag != nil %>
           <div class="form-group" >
-            <button class="btn btn-info" >
-              #<%= user_tag.tag.name %>
-            </button>
+            <%= link_to "##{user_tag.tag.name}",memos_path(@memos, :search=>user_tag.tag.id), class:"btn btn-info"%> 
           </div>
           <% end %>
         <% end %>
