@@ -10,9 +10,15 @@
   <%= devise_error_messages! %>
 
   <div class="form-group">
+    <%= f.text_field :name, autofocus: true, class:"form-control",placeholder:"Name"%>
+  </div>
+  <br>
+
+  <div class="form-group">
     <%= f.email_field :email, autofocus: true, class:"form-control",placeholder:"Email"%>
   </div>
   <br>
+
 
   <div class="form-group">
     <%= f.password_field :password, autocomplete: "off", class:"form-control",placeholder:"Password (6 characters minimum) " %>

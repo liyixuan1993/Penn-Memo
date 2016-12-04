@@ -43,7 +43,7 @@
     <%= f.label :priority %>
   </div>
 
-  <%= f.hidden_field :author,:value => current_user.id %>
+  <%= f.hidden_field :author,:value => current_user.name %>
 
   <div class="actions">
     <%= f.submit class:"btn btn-default form-control"%>
