@@ -1,0 +1,40 @@
+<div class="container">
+
+<p id="notice"><%= notice %></p>
+
+<h1>Responses</h1>
+
+<div style="height:500px;overflow-y:scroll">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User_id</th>
+      <th>Memo_id</th>
+      <th>Content</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @responses.each do |response| %>
+      <tr>
+        <td><%= response.user_id %></td>
+        <td><%= response.memo_id %></td>
+        <td><%= response.content %></td>
+        <td><%= link_to 'Show', response %></td>
+        <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+
+</div>
+<br>
+<br>
+<%= link_to 'Back', memos_path, class:"btn btn-default" %>
+</div>

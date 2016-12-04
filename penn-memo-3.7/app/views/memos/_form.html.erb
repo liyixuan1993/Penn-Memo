@@ -1,0 +1,53 @@
+<div style="width:100%">
+<%= form_for(memo) do |f| %>
+  <% if memo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(memo.errors.count, "error") %> prohibited this memo from being saved:</h2>
+
+      <ul>
+      <% memo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="form-group">
+    <%= f.label :tag_id %> <strong>#</strong>
+    <%= collection_select :memo, :tag_id, Tag.all, :id, :name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Add Tag", new_tag_path, class:"btn btn-default btn-sm"%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date %>
+    <%= f.date_select :date%>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :title,class:"form-control", placeholder:"Title" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_area :content, class:"form-control", style:"height:100px",placeholder:"Content" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :attachment %>
+    <%= f.file_field :image%>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :priority %>
+    <%= f.label :priority %>
+  </div>
+
+  <%= f.hidden_field :author,:value => current_user.id %>
+
+  <div class="actions">
+    <%= f.submit class:"btn btn-default form-control"%>
+  </div>
+<% end %>
+
+</div>

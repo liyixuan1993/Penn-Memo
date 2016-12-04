@@ -1,0 +1,116 @@
+
+<p id="notice"><%= notice %></p>
+  <div class="row" >
+    <!--Tag list area-->
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+      <div class="container" style="height:300px">
+  		<br>
+  		<%= form_tag(memos_path, :method => "get", id: "search-form") do %>
+  		<%= text_field_tag :search, params[:search], placeholder: "Search", style:"width:80px" %>
+  		<%= submit_tag "Go" ,style:"width:28px", class:"btn btn-default btn-xs"%>
+  		<% end %>
+        <br>
+        <br>
+        <br>
+        <%= link_to "Add tag", new_user_tag_path, class:"btn btn-success btn-xs" %> <%= link_to "Delete tag", user_tags_path, class:"btn btn-danger btn-xs" %>
+
+
+        <h3>Tags</h3>
+
+
+
+        <% current_user.user_tags.each do |user_tag| %>
+          <% if user_tag.tag != nil %>
+          <div class="form-group" >
+            <button class="btn btn-info" >
+              #<%= user_tag.tag.name %>
+            </button>
+          </div>
+          <% end %>
+        <% end %>
+
+        <br>
+        <br>
+        <br>
+
+      </div>
+  </div>
+
+    <!--Priority memo area-->
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" >
+      <div  style="width:600px">
+      <% if current_user.user_tags.count > 0 %>
+
+        <% if current_user.user_tags.map(&:tag_id) & Memo.all.map(&:tag_id) != [] %>
+
+         <% if Memo.where(:priority => true).count > 0 %>
+
+
+          <% if Memo.where(:priority => true, :tag_id =>  current_user.user_tags.map(&:tag_id)).count > 0%>
+         <div class="container">
+          <%= link_to priority_page_index_path do %>
+         <button class="btn btn-default btn-lg" type="submit" style="width:98%"> you have <%= Memo.where(:priority => true, :tag_id =>  current_user.user_tags.map(&:tag_id)).count %> priority memos
+          <br>
+         </button>
+          <% end %>
+         </div>
+          <% end %>
+
+
+         <% end %>
+         <br>
+
+
+         <div class="container">
+           <h1>Memos</h1>
+         </div>
+
+               <div class="container" style="height:400px; overflow-y:auto">
+
+              <% @memos.each do |memo| %>
+                <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
+                <div >
+                <%= link_to memo do %>
+                <button class="btn btn-default btn-lg " type="submit" style="width:100%; height:120px">
+                     <p style="text-align:left; overflow-x:hidden">
+                       <strong>From:</strong>&nbsp;<%= memo.author %>
+                     </p>
+                     <p style="text-align:left; word-break:break-all;  height:20px; overflow-y:hidden">
+                       <%= memo.content%>
+                     </p>
+
+                     <div class="row">
+                       <div class="col-xs-6">
+                         <p style="text-align:left"><strong>#<%= memo.tag.name %></strong></p>
+                       </div>
+                       <div class="col-xs-6">
+                         <p style="text-align:right"><%= memo.date %></p>
+                       </div>
+                     </div>
+               </button>
+               <% end %>
+             </div>
+                  <% end %>
+                  <br>
+                  <% end %>
+                </div>
+              </div>
+
+
+          <% end %>
+      <% end %>
+</div>
+
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+  <div class="container">
+  </div>
+</div>
+
+  </div>
+
+
+
+
+
+
+<!-- end of Memos -->
