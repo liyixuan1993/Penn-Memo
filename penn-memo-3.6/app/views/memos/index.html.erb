@@ -1,5 +1,6 @@
 
 <p id="notice"><%= notice %></p>
+  
   <div class="row" >
     <!--Tag list area-->
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
@@ -22,10 +23,7 @@
         <% current_user.user_tags.each do |user_tag| %>
           <% if user_tag.tag != nil %>
           <div class="form-group" >
-            <button class="btn btn-info" >
-              #<%= user_tag.tag.name %>
-            </button>
-          </div>
+            <%= link_to "##{user_tag.tag.name}",memos_path(@memos, :search=>user_tag.tag.id), class:"btn btn-info"%> 
           <% end %>
         <% end %>
 
