@@ -1,0 +1,15 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_tag.user.id %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @user_tag.tag.name %>
+</p>
+
+<%= link_to 'Edit', edit_user_tag_path(@user_tag) %> |
+<%= link_to 'Back', memos_path %>
