@@ -86,14 +86,14 @@ class MemosController < ApplicationController
   def unreadToRead
       @memo = Memo.find(params[:id])
       val = params[:id]
-      if (Unread.where(:user_id => current_user.id, :memo_id => @memo_id, :notification => true).count  == 0)
+      if (@memo.priority == true) 
 
-        @unread = @memo.unreads.create(:user_id => current_user.id, :memo_id => @memo.id, :notification => true)
+        if(Unread.where(:user_id => current_user.id, :memo_id => @memo_id, :notification => true).count  == 0)
+
+          @unread = @memo.unreads.create(:user_id => current_user.id, :memo_id => @memo.id, :notification => true)
+        end
       end
-      # @memo = Memo.find(params[:id])
-      # val = params[:id]
-      # @unread = Unread.where(:memo_id => val, :user_id => current_user.id)
-      # @unread.update_all(notification: true)
+
       redirect_to memo_path
   end
 
