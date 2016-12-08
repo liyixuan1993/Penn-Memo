@@ -1,0 +1,48 @@
+
+
+
+
+<div class="container" >
+<div class="container" >
+<h1>Priority Memos</h1>
+</div>
+
+<% if current_user.user_tags.map(&:tag_id) & @memos.all.map(&:tag_id) != [] %>
+
+<div class="container" style="height:600px;overflow-y:auto">
+  <div >
+<% @pys.each do |py| %>
+ <% if py.priority == true%>
+ <% if current_user.user_tags.map(&:tag_id).include?(py.tag.id) %>
+
+  <% if Unread.where(:memo_id => py.id, :user_id => current_user.id, :notification => true).count == 0 %>
+  <div>
+  <%= link_to activate_notification_path(py) do %>
+ <button class="btn btn-default btn-lg " type="submit" style="width:100%">
+      <p style="text-align:left; overflow-x:hidden;width:210px"><strong>From:&nbsp;</strong><%= py.author %></p>
+      <p style="text-align:left;word-break:break-all; width:100%; overflow-x:hidden; height:20px; overflow-y:auto"><%= py.content %></p>
+      <div class="row">
+        <div class="col-xs-6">
+          <p style="text-align:left"><strong>#<%= py.tag.name %></strong></p>
+        </div>
+        <div class="col-xs-6">
+          <p style="text-align:right"><%= py.date %></p>
+        </div>
+      </div>
+</button>
+    <% end %>
+  </div>
+    <% end %>
+   <% end %>
+   <% end %>
+   <br>
+   <% end %>
+ </div>
+
+</div>
+
+<% end %>
+<div class="container">
+ <%= link_to 'Back to mainpage', :back, class:"btn btn-default" %>
+ </div>
+</div>

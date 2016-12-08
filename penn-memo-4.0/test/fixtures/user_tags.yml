@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: user_tags
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  tag_id     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  tag: one
+
+two:
+  user: two
+  tag: two
