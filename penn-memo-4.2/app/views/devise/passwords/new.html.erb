@@ -1,0 +1,31 @@
+<div style="background: url('/assets/homepage.jpg'); height:930px">
+
+<div style="height:100px">
+</div>
+
+<div class="container" style="width:400px">
+  <div style="height:70px">
+  </div>
+
+<h3 align="center" style="color:#ffffff">Forgot your password?</h3>
+<br>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <%= f.label :email ,style:"color:#ffffff"%><br />
+    <%= f.email_field :email, autofocus: true, class:"form-control" %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= f.submit "Send me reset password instructions", class:"btn btn-default form-control" %>
+  </div>
+<% end %>
+<br>
+
+<%= render "devise/shared/links" %>
+</div>
+
+</div>
