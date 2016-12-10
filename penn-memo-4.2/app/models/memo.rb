@@ -23,7 +23,7 @@ class Memo < ApplicationRecord
   validates_attachment :image, content_type: { content_type: ["application/pdf", "image/jpeg", "image/gif", "image/png"] }
 
   def self.search(search)
-        where("LOWER(tag_id) LIKE ? OR LOWER(content) LIKE ? OR LOWER(title) LIKE ? OR LOWER(author) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%")
+    where("LOWER(content) LIKE ? OR LOWER(title) LIKE ? OR LOWER(author) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%")
   end
 
 

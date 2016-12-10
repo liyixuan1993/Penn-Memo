@@ -9,8 +9,8 @@ class MemosController < ApplicationController
     @unreads = Unread.all
     if params[:search]
       @memos = Memo.search(params[:search]).order("created_at DESC")
-    else
-      @memos = Memo.all.order("created_at DESC")
+    # else
+    #   @memos = Memo.all.order("created_at DESC")
     end
 
   end
@@ -37,14 +37,15 @@ class MemosController < ApplicationController
   end
 
   def sort
-      @memos = Memo.where(:tag_id => params[:field])
+    @memos = Memo.where(:tag_id => params[:field])
+    if params[:search]
+      @memos = Memo.where(:tag_id => params[:field]).search(params[:search]).order("created_at DESC")
+    end
   end
 
   def priority
-      @memos = Memo.where(:tag_id => params[:field])
-
-      @pys = @memos.where(:priority => true)
-
+    @memos = Memo.where(:tag_id => params[:field])
+    @pys = @memos.where(:priority => true)
 end
 
 
