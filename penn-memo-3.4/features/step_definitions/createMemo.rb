@@ -57,13 +57,17 @@ Given (/^I'm on the add New Tag page$/) do
 	create_admin
 	sign_in
 	expect(page).to have_content "Signed in successfully"
-	visit 'tags/new'
+	# save_and_open_page
+	visit '/memos/new'
+	click_link 'Add Tag'
+	# visit 'tags/new'
 end
 
 When (/^I add a new Tag$/) do
 	
 	fill_in 'Name', :with => "# 14th floor"
 	click_button "Create Tag"
+
 end
 
 Then (/^I should be able to see a successfully created tag message$/) do
@@ -131,6 +135,77 @@ Then (/^I should be able to see a priority post$/) do
 
 end
 
+Given (/^I'm on the add comment page$/) do 
+	  create_admin
+	  sign_in
+	  visit '/memos/new'
+	  click_link 'Add Tag'
+	  fill_in 'Name', :with => "# 14th floor"
+	  click_button "Create Tag"
+	  visit(new_memo_path)
+	  fill_in 'Author', :with => "Wei-An"
+	  fill_in 'Title', :with => "project meeting"
+	  fill_in 'Content', :with => "Today we are going to have a project meeting about iteration1."
+	  check('Priority')
+	  click_button "Create Memo"
+	  click_link 'Back'
+	  visit '/memos'
+	  visit '/user_tags/new'
+	  click_button 'Create User tag'
+	  click_link 'Back'
+	  click_button 'you have 1 priority memos'
+end
 
+When (/^I respond to a memo$/) do
+	
+	click_link 'Show'
+	fill_in 'Content', :with => 'Good Morning Everyone'
+	click_button 'Create Response'
+
+end
+
+Then (/^I should be able to see a successfully created response message$/) do
+	expect(page).to have_content "User1 : Good Morning Everyone"
+end
+
+Given (/^I'm on the edit response page$/) do 
+	  create_admin
+	  sign_in
+	  visit '/memos/new'
+	  click_link 'Add Tag'
+	  fill_in 'Name', :with => "# 14th floor"
+	  click_button "Create Tag"
+	  visit(new_memo_path)
+	  fill_in 'Author', :with => "Wei-An"
+	  fill_in 'Title', :with => "project meeting"
+	  fill_in 'Content', :with => "Today we are going to have a project meeting about iteration1."
+	  check('Priority')
+	  click_button "Create Memo"
+	  click_link 'Back'
+	  visit '/memos'
+	  visit '/user_tags/new'
+	  click_button 'Create User tag'
+	  click_link 'Back'
+	  click_button 'you have 1 priority memos'
+	  click_link 'Show'
+	  fill_in 'Content', :with => 'Good Morning Everyone'
+	  click_button 'Create Response'
+	  click_link 'Back'
+	  visit '/memos'
+end
+
+When (/^I edit a certain response$/) do
+	visit '/responses'
+	click_link 'Show'
+	click_link 'Edit'
+	fill_in 'Content', :with => 'Hi there. What is the time?'
+	click_button 'Update Response'
+
+end
+
+Then (/^I should be able to update the response$/) do
+	expect(page).to have_content "Response was successfully updated"
+	expect(page).to have_content "Hi there. What is the time?"
+end
 
 

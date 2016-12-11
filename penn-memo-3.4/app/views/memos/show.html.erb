@@ -48,7 +48,7 @@
 <%= form_for @response do |f| %>
 
 <div class="field">
-  <strong> Your Response </strong><br>
+  <%= f.label :content %><br>
   <%= f.text_field :content %>
 </div>
 

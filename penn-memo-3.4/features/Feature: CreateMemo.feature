@@ -25,6 +25,17 @@ Feature: Create New Memo
 		Given I'm on the add new post page
 		When I add a new priority post
 		Then I should be able to see a priority post
+		
+	Scenario: Add a comment on a certain memo 
+		Given I'm on the add comment page
+	 	When I respond to a memo
+	  	Then I should be able to see a successfully created response message
+
+	Scenario: Edit Response
+		Given I'm on the edit response page
+		When I edit a certain response
+		Then I should be able to update the response
+
 
 	
 
