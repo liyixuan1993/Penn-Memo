@@ -98,7 +98,7 @@
 
          <div style="width:530px; height:400px; overflow-y:auto">
 
-              <% @memos.each do |memo| %>
+              <% @memos.order(:created_at).reverse_order.each do |memo| %>
                 <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
                 <div >
                 <%= link_to activate_notification_path(memo) do %>
