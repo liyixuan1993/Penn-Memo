@@ -1,0 +1,31 @@
+
+
+<h1>Unreads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Memo</th>
+      <th>User</th>
+      <th>Notification</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @unreads.each do |unread| %>
+      <tr>
+        <td><%= unread.memo %></td>
+        <td><%= unread.user %></td>
+        <td><%= unread.notification %></td>
+        <td><%= link_to 'Show', unread %></td>
+        <td><%= link_to 'Edit', edit_unread_path(unread) %></td>
+        <td><%= link_to 'Destroy', unread, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Unread', new_unread_path %>

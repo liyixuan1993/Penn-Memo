@@ -1,0 +1,142 @@
+
+
+<div style="margin-left:20px; width:830px">
+  <div class="row" >
+    <!--Tag list area-->
+    <div class="col-sm-2" style="margin-top:6px;width:250px;">
+      <div style="height:20px" >
+
+        <form class="form-inline">
+          <%= form_tag(memos_path, :method => "get", id: "search-form") do %>
+          <div class="form-group">
+            <%= text_field_tag :search, params[:search], placeholder: "Search",class:"form-control", style:"width:140px"%>
+          </div>
+          <div class="form-group">
+            <%= submit_tag "Go", class:"btn btn-default form-control", style:"width:45px"%>
+          </div>
+          <% end %>
+        </form>
+
+      </div>
+
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <%= link_to "Add tag", new_user_tag_path, class:"btn btn-default", style:"width:90px"%>&nbsp;&nbsp;
+      <% if current_user.user_tags.count > 0 %>
+      <%= link_to "Delete tag", user_tags_path, class:"btn btn-default", style:"width:90px" %>
+      <% end %>
+
+      <% if current_user.user_tags.count > 0 %>
+      <h3>Tags</h3>
+      <% end %>
+
+
+
+        <% current_user.user_tags.each do |user_tag| %>
+          <% if user_tag.tag != nil %>
+          <div class="form-group">
+            <%= link_to :controller=>"memos", :action => "sort", :field => "#{user_tag.tag.id}" do%>
+            <button id="myBtn" class="btn btn-default form-control" style="width:195px">
+              #<%= user_tag.tag.name %>
+            </button>
+              <% end %>
+          </div>
+
+
+          <% end %>
+        <% end %>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+  </div>
+
+
+
+    <!--Priority memo area-->
+    <div class="col-sm-10" style="width:550px">
+
+        <br>
+
+
+
+      <% if current_user.user_tags.count > 0 %>
+
+        <% if current_user.user_tags.map(&:tag_id) && @memos.map(&:tag_id) != [] %>
+
+
+         <% if @memos.where(:priority => true).count > 0 %>
+
+
+          <% if @memos.where(:priority => true).count - Unread.where(:user_id => current_user.id, :notification => true, :memo_id => @memos.map(&:id)).count > 0%>
+         <div >
+          <%= link_to priority_path do %>
+         <button class="btn btn-default btn-lg" type="submit" style="width:500px"> you have <%= @memos.where(:priority => true).count - Unread.where(:user_id => current_user.id, :notification => true, :memo_id => @memos.map(&:id)).count %> Unread priority memos
+
+         </button>
+          <% end %>
+         </div>
+          <% end %>
+
+
+         <% end %>
+         <br>
+         <br>
+         <br>
+
+
+
+         <div >
+           <h1>Memos- #<%= Tag.find(params[:field]).name %></h1>
+         </div>
+
+         <div style="width:530px; height:400px; overflow-y:auto">
+
+              <% @memos.order(:created_at).reverse_order.each do |memo| %>
+                <% if current_user.user_tags.map(&:tag_id).include?(memo.tag.id) %>
+                <div >
+                <%= link_to activate_notification_path(memo) do %>
+                <button class="btn btn-default btn-lg " type="submit" style="width:500px;height:120px">
+                     <p style="text-align:left; overflow-x:hidden">
+                       <strong>From:</strong>&nbsp;<%= memo.author %>
+                     </p>
+                     <p style="text-align:left; word-break:break-all; overflow-x:hidden">
+                       <%= memo.content%>
+                     </p>
+                     <div class="row">
+                       <div class="col-xs-6">
+                         <p style="text-align:left"><strong>#<%= memo.tag.name %></strong></p>
+                       </div>
+                       <div class="col-xs-6">
+                         <p style="text-align:right"><%= memo.date %></p>
+                       </div>
+                     </div>
+               </button>
+               <% end %>
+             </div>
+                  <% end %>
+                  <br>
+                  <% end %>
+                </div>
+              </div>
+
+
+          <% end %>
+      <% end %>
+</div>
+
+
+  </div>
+
+
+
+
+
+
+<!-- end of Memos -->
